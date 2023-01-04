@@ -1,12 +1,12 @@
 <template>
-  <LoginContainer />
+  <RegisterContainer />
 </template>
 
 <script>
-import LoginContainer from "@/containers/LoginContainer.vue";
+import RegisterContainer from "@/containers/RegisterContainer.vue";
 export default {
   components: {
-    LoginContainer,
+    RegisterContainer,
   },
 };
 </script>

@@ -26,7 +26,7 @@ export default {
   justify-content: flex-start;
   padding: 0px;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 5.76px;
 
   .require {
     padding: 0px 8px;
