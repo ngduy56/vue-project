@@ -4,11 +4,10 @@
     <div class="line" :style="{ width: lineWidth }"></div>
     <div class="step-list">
       <StepItem
-        :dynamicForm="dynamicForm"
-        v-for="(item, index) in dynamicForm"
+        v-for="item in dynamicForm"
         :key="item.num"
         :item="item"
-        :index="index"
+        :currentStep="currentStep"
         @changeForm="changeForm"
       />
     </div>
@@ -18,21 +17,9 @@
 import StepItem from "./StepItem.vue";
 
 export default {
-  props: ["dynamicForm"],
+  props: ["dynamicForm", "currentStep"],
   components: {
     StepItem,
-  },
-  mounted() {
-    let itemStep = document.querySelectorAll(".step-num");
-    itemStep[0].classList.add("active");
-
-    this.dynamicForm.map((item, index) => {
-      if (item.isDone) {
-        itemStep[index].classList.add("done");
-      } else {
-        itemStep[index].classList.remove("done");
-      }
-    });
   },
   computed: {
     lineWidth() {
@@ -40,14 +27,8 @@ export default {
     },
   },
   methods: {
-    changeForm(num, index) {
+    changeForm(num) {
       this.$emit("changeForm", num);
-
-      let itemStep = document.querySelectorAll(".step-num");
-      itemStep.forEach((i) => {
-        i.classList.remove("active");
-      });
-      itemStep[index].classList.add("active");
     },
   },
 };
@@ -58,7 +39,6 @@ export default {
   position: relative;
   width: 100%;
   height: 148px;
-
   .title {
     font-size: 32px;
     color: #333333;

@@ -1,18 +1,21 @@
 <template>
   <div class="register__form">
-    <StepperForm :dynamicForm="dynamicForm" @changeForm="changeForm" />
+    <StepperForm
+      :dynamicForm="dynamicForm"
+      :currentStep="currentStep"
+      @changeForm="changeForm"
+    />
     <DynamicForm
       :dynamicForm="dynamicForm"
       :formData="formData"
-      :numStep="numStep"
+      :currentStep="currentStep"
       @input="onChangeValue"
       @onUploadFile="onUploadFile"
       @onRemoveFile="onRemoveFile"
       @onAddChosen="onAddChosen"
       @onRemoveChosen="onRemoveChosen"
-      @changeForm="changeForm"
       @nextStep="nextStep"
-      @doneStep="doneStep"
+      @prevStep="prevStep"
     />
   </div>
 </template>
@@ -24,20 +27,20 @@ import DynamicForm from "@/features/register/dynamicForm/DynamicForm.vue";
 export default {
   data() {
     return {
-      numStep: 1,
+      currentStep: 1,
       dynamicForm,
     };
   },
   components: { StepperForm, DynamicForm },
   computed: {
     formData() {
-      const currentStep = this.dynamicForm.find(
-        (item) => item.num === this.numStep
+      const activeStep = this.dynamicForm.find(
+        (item) => item.num === this.currentStep
       );
-      return currentStep.data;
+      return activeStep.data;
     },
     isLastForm() {
-      return this.numStep === this.dynamicForm.length;
+      return this.currentStep === this.dynamicForm.length;
     },
   },
   methods: {
@@ -131,47 +134,43 @@ export default {
       });
       return data;
     },
+    setCurrentStep(index) {
+      this.currentStep = index;
+    },
+    resetForm() {
+      this.dynamicForm.forEach((item) => {
+        item.isDone = false;
+        item.data.forEach((child) => {
+          if (typeof child.value === "string") {
+            child.value = "";
+          } else if (Array.isArray(child.value)) {
+            child.value = [];
+          }
+        });
+      });
+    },
     nextStep() {
       if (this.isLastForm) {
         const data = this.filterValue(this.dynamicForm);
         console.log(data);
         this.$router.push({ path: "/" });
-
-        // setTimeout(() => {
-        let steps = document.querySelectorAll(".step-num");
-        steps.forEach((i) => {
-          i.classList.remove("done");
-          i.classList.remove("active");
-        });
-
-        this.dynamicForm.forEach((item) => {
-          item.isDone = false;
-          item.data.forEach((child) => {
-            if (typeof child.value === "string") {
-              child.value = "";
-            } else if (Array.isArray(child.value)) {
-              child.value = [];
-            }
-          });
-        });
-        console.log(this.dynamicForm);
-        // }, 0);
+        this.resetForm();
       }
+      if (!this.isLastForm) {
+        this.doneStep(this.currentStep);
+      }
+      const index =
+        this.currentStep < this.dynamicForm.length
+          ? this.currentStep + 1
+          : this.dynamicForm.length;
+      this.setCurrentStep(index);
+    },
+    prevStep() {
+      const index = this.currentStep > 0 ? this.currentStep - 1 : 1;
+      this.setCurrentStep(index);
     },
     changeForm(num) {
-      if (num < this.numStep) {
-        let itemStep = document.querySelectorAll(".step-num");
-        let index = this.dynamicForm.findIndex((item) => item.num === num);
-        itemStep[index + 1]?.classList.remove("active");
-        itemStep[index]?.classList.add("active");
-
-        this.dynamicForm.forEach((item, index) => {
-          if (item.isDone) {
-            itemStep[index].classList.add("done");
-          }
-        });
-      }
-      this.numStep = num;
+      this.setCurrentStep(num);
     },
     doneStep(num) {
       this.dynamicForm.forEach((item) => {
@@ -179,11 +178,6 @@ export default {
           item.isDone = true;
         }
       });
-      let itemStep = document.querySelectorAll(".step-num");
-      let index = this.dynamicForm.findIndex((item) => item.num === num);
-      itemStep[index]?.classList.remove("active");
-      itemStep[index]?.classList.add("done");
-      itemStep[index + 1]?.classList.add("active");
     },
   },
 };

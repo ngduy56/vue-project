@@ -22,7 +22,7 @@
       >
         {{ isLastForm ? "Finish" : "Next" }}
       </button>
-      <button v-if="!isFirstForm" class="btn__prev" @click="previousStep">
+      <button v-if="!isFirstForm" class="btn__prev" @click="prevStep">
         Back
       </button>
       <button class="btn__navigate" @click="navigateLogin">
@@ -51,7 +51,7 @@ export default {
       type: Array,
       required: true,
     },
-    numStep: {
+    currentStep: {
       type: Number,
     },
   },
@@ -60,10 +60,10 @@ export default {
   },
   computed: {
     isFirstForm() {
-      return this.numStep === 1;
+      return this.currentStep === 1;
     },
     isLastForm() {
-      return this.numStep === this.dynamicForm.length;
+      return this.currentStep === this.dynamicForm.length;
     },
     formLength() {
       return this.formData.length > 0;
@@ -79,7 +79,7 @@ export default {
       },
       deep: true,
     },
-    numStep: {
+    currentStep: {
       handler() {
         this.isValid = false;
       },
@@ -128,15 +128,13 @@ export default {
         this.isValid = true;
       }
       if (this.isValid) {
-        this.$emit("doneStep", this.numStep);
         this.$emit("nextStep");
-        this.$emit("changeForm", this.numStep + 1);
       } else {
         console.log("co loi");
       }
     },
-    previousStep() {
-      this.$emit("changeForm", this.numStep - 1);
+    prevStep() {
+      this.$emit("prevStep");
     },
     navigateLogin() {
       this.$router.push({ path: "/" });

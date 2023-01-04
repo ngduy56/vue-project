@@ -1,6 +1,11 @@
 <template>
   <div class="step-item">
-    <span @click="changeForm" class="step-num">{{ item.num }} </span>
+    <span
+      @click="changeForm"
+      class="step-num"
+      :class="{ active: currentStep === item.num, done: item.isDone }"
+      >{{ item.num }}
+    </span>
     <div class="step-title">{{ item.name }}</div>
   </div>
 </template>
@@ -18,10 +23,13 @@ export default {
     dynamicForm: {
       type: Array,
     },
+    currentStep: {
+      type: Number,
+    },
   },
   methods: {
     changeForm() {
-      this.$emit("changeForm", this.item.num, this.index);
+      this.$emit("changeForm", this.item.num);
     },
   },
 };
