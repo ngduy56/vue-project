@@ -1,5 +1,5 @@
 <template>
-  <div class="register__form">
+  <div class="dynamic__form">
     <span class="title">{{ title }}</span>
     <StepperForm
       :dynamicForm="dynamicForm"
@@ -184,11 +184,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss";
-.register__form {
+.dynamic__form {
   width: 596px;
   max-height: 683px;
   position: absolute;
-
+  gap: 24px;
   padding: 24px 32px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

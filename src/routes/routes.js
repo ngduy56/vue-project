@@ -2,6 +2,7 @@ import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import HomePage from "@/pages/HomePage";
 import RequestContainer from "@/containers/RequestContainer.vue";
+import DetailContainer from "@/containers/DetailContainer.vue";
 
 export const routes = [
   { path: "/", name: "LoginPage", component: LoginPage },
@@ -17,7 +18,7 @@ export const routes = [
       {
         path: "requests:id",
         name: "requestDetail",
-        component: RequestContainer,
+        component: DetailContainer,
       },
     ],
   },

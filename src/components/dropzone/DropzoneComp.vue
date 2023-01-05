@@ -7,7 +7,11 @@
       :maxNumber="maxNumber"
       :typeFile="typeFile"
     />
-    <FileElement :fileList="fileList" @onRemove="onRemove" />
+    <FileElement
+      v-if="fileList.length > 0"
+      :fileList="fileList"
+      @onRemove="onRemove"
+    />
   </div>
 </template>
 

@@ -149,10 +149,11 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  width: 530px;
+  width: 100%;
 
   .container {
     width: 100%;
+    height: 100%;
     max-height: 418px;
     overflow: scroll;
     overflow-x: hidden;
@@ -180,6 +181,7 @@ export default {
     }
   }
   .navigate-block {
+    margin-top: 24px;
     .btn__next {
       width: 102px;
       height: 40px;
@@ -191,7 +193,6 @@ export default {
       outline: none;
       border: none;
       color: #ffffff;
-      margin-top: 24px;
 
       &.active {
         background: #627d98;
@@ -208,14 +209,14 @@ export default {
       line-height: 24px;
       border: none;
       outline: none;
-      margin: 24px 0 0 10px;
+      margin-left: 10px;
       cursor: pointer;
       color: #333333;
       font-weight: 400;
     }
     .btn__navigate {
       float: right;
-      margin: 24px 0 0 10px;
+      margin-left: 10px;
       border: none;
       width: 150px;
       height: 40px;

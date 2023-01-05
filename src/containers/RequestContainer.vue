@@ -106,6 +106,7 @@ export default {
           padding-left: 54px;
         }
         &:last-child {
+          // padding-right: 50px;
           text-align: center;
         }
       }
@@ -117,6 +118,7 @@ export default {
           padding-left: 54px;
         }
         &:last-child {
+          // padding-right: 50px;
           text-align: center;
         }
       }
@@ -146,6 +148,8 @@ export default {
     }
     .user__item {
       display: flex;
+      width: 100%;
+      cursor: pointer;
 
       p {
         margin: 0;
