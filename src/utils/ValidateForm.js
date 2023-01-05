@@ -32,21 +32,12 @@ const checkSalary = (item) => {
     item.error = `${item.label} has maxixum ${item.maxLength} numbers`;
   }
 };
-const checkInvalidTime = (child) => {
-  const currentDate = new Date().getTime();
-  const startDate = new Date(child.value.from).getTime();
-  const endDate = new Date(child.value.to).getTime();
-  if (!child.value.from || !child.value.to) {
-    child.error = `${child.label} is required!`;
-  }
-  if (
-    startDate > currentDate ||
-    endDate > currentDate ||
-    startDate > endDate ||
-    startDate === endDate
-  ) {
-    child.error = `${child.label} is invalid!`;
+const checkPassword = (formData) => {
+  const password = formData.find((item) => item.key === "password");
+  const rePassword = formData.find((item) => item.key === "re-password");
+  if (password.value !== rePassword.value) {
+    password.error = `${password.label} is not match`;
+    rePassword.error = `${rePassword.label} is not match`;
   }
 };
-
-export { checkRequired, checkLength, checkDate, checkSalary, checkInvalidTime };
+export { checkRequired, checkLength, checkDate, checkSalary, checkPassword };

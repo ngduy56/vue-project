@@ -59,6 +59,11 @@ export default {
     OptionItem,
     SearchInput,
   },
+  mounted() {
+    this.optionList.forEach((item) => {
+      item.isChosen = false;
+    });
+  },
   methods: {
     addChosen(optionItem) {
       this.$emit("addChosen", optionItem);

@@ -1,8 +1,7 @@
 <template>
   <div class="step-block">
-    <span class="title">Register</span>
-    <div class="line" :style="{ width: lineWidth }"></div>
     <div class="step-list">
+      <div class="line" :style="{ width: lineWidth }"></div>
       <StepItem
         v-for="item in dynamicForm"
         :key="item.num"
@@ -38,7 +37,6 @@ export default {
 .step-block {
   position: relative;
   width: 100%;
-  height: 148px;
   .title {
     font-size: 32px;
     color: #333333;
@@ -48,15 +46,15 @@ export default {
   .line {
     height: 1px;
     position: absolute;
-    top: 80px;
-    left: 74px;
+    top: 20px;
+    left: 70px;
     background-color: #dbdbdb;
   }
   .step-list {
     display: flex;
     justify-content: flex-start;
     position: relative;
-    margin: 22px 0 32px 0;
+    margin: 24px 0;
     gap: 10px;
   }
 }

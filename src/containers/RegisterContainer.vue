@@ -2,18 +2,36 @@
   <div class="container">
     <div class="authentication">
       <AuthRegister />
-      <RegisterForm />
+      <RegisterForm
+        :title="title"
+        :dynamicForm="registerForm"
+        @onChange="onChange"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import RegisterForm from "@/features/register/RegisterForm.vue";
+import RegisterForm from "@/components/dynamicForm/DynamicForm.vue";
 import AuthRegister from "@/components/AuthRegister.vue";
+import { registerForm } from "@/features/register/registerForm";
+
 export default {
+  data() {
+    return {
+      title: "Register",
+      registerForm,
+    };
+  },
   components: {
     RegisterForm,
     AuthRegister,
+  },
+  methods: {
+    onChange(data) {
+      this.$router.push({ path: "/home" });
+      console.log(data);
+    },
   },
 };
 </script>

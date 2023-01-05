@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import InputField from "@/components/InputField.vue";
+import InputField from "@/components/sharedComponents/InputField.vue";
 
 export default {
   components: {

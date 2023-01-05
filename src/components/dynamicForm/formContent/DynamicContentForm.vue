@@ -33,10 +33,11 @@
 </template>
 
 <script>
-import DynamicInputView from "@/features/register/dynamicForm/DynamicInputView.vue";
+import DynamicInputView from "@/components/dynamicForm/formContent/DynamicInputView.vue";
 import {
   checkDate,
   checkLength,
+  checkPassword,
   checkRequired,
   checkSalary,
 } from "@/utils/ValidateForm";
@@ -118,6 +119,9 @@ export default {
         }
         if (item.view_type === INPUT_SALARY) {
           checkSalary(item);
+        }
+        if (item.key === "re-password") {
+          checkPassword(this.formData);
         }
       });
     },

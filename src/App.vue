@@ -17,6 +17,7 @@ body {
   overflow-y: scroll;
   margin: 0;
   padding: 0;
+  background: #f9f9f9;
 }
 #app {
   font-family: "Inter", sans-serif;

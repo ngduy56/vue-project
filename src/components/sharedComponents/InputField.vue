@@ -1,41 +1,56 @@
 <template>
-  <div class="input-date">
+  <div class="input-field">
     <InputLabel
       :label="label"
-      :required="required"
       :style="{ width: `${width}px` }"
+      :required="required"
     />
     <input
-      class="input"
-      type="date"
       :class="{ 'in-valid': error }"
+      :type="type"
+      :style="{ width: `${width}px` }"
+      :placeholder="placeholder"
       v-model="valueLocal"
       @input="onChange"
     />
     <span v-if="error" class="error-vali">{{ error }}</span>
   </div>
 </template>
+
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 export default {
   data() {
     return {
       valueLocal: "",
     };
   },
+  components: {
+    InputLabel,
+  },
   watch: {
     value: {
       handler(val) {
         this.valueLocal = val;
       },
-      deep: true,
       immediate: true,
+      deep: true,
     },
   },
   props: {
+    value: {
+      type: String,
+    },
     width: {
       type: Number,
       default: 450,
+    },
+    type: {
+      type: String,
+      default: "text",
+    },
+    placeholder: {
+      type: String,
     },
     label: {
       type: String,
@@ -43,16 +58,14 @@ export default {
     required: {
       type: Boolean,
     },
+    maxLength: {
+      type: Number,
+    },
     error: {
       type: String,
     },
-    value: {
-      type: String,
-    },
   },
-  components: {
-    InputLabel,
-  },
+
   methods: {
     onChange() {
       this.$emit("input", this.valueLocal);
@@ -62,35 +75,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input-date {
-  display: flex;
-  flex-direction: column;
-
-  .input {
-    font-family: "Inter", sans-serif;
-    width: 130px;
+.input-field {
+  input {
     height: 40px;
     outline: none;
     background: #ffffff;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
-    color: #000000;
-    font-weight: 400;
+    padding: 0 10px;
     font-size: 14px;
-    text-align: center;
-    line-height: 40px;
-    padding: 0 8px 0 6px;
 
-    &::-webkit-calendar-picker-indicator {
-      cursor: pointer;
+    &::placeholder {
+      color: rgba(153, 153, 153, 0.28);
+      font-size: 14px;
+      line-height: 20px;
     }
   }
-
   .in-valid {
     border-color: red;
   }
   .error-vali {
-    margin-top: 2px;
     color: red;
     font-size: 14px;
     width: 100%;

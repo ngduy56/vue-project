@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 import InputExam from "@/components/autoComplete/InputExam.vue";
 export default {
   data() {

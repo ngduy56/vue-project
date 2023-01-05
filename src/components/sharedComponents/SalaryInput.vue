@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 import { ZERO_REGEX } from "@/constants/registerFormConstants";
 export default {
   data() {

@@ -3,6 +3,7 @@
     <InputField
       v-if="item.view_type === INPUT_TEXT"
       :value="valueLocal"
+      :type="item.type"
       :label="item.label"
       :required="item.required"
       :maxLength="item.maxLength"
@@ -66,13 +67,13 @@
 </template>
 
 <script>
-import InputField from "@/components/InputField.vue";
-import InputDate from "@/components/InputDate.vue";
-import DropdownList from "@/components/DropdownList.vue";
-import PositionInput from "@/components/PositionInput.vue";
-import AboutArea from "@/components/TextArea.vue";
+import InputField from "@/components/sharedComponents/InputField.vue";
+import InputDate from "@/components/sharedComponents/InputDate.vue";
+import DropdownList from "@/components/sharedComponents/DropdownList.vue";
+import PositionInput from "@/components/sharedComponents/PositionInput.vue";
+import AboutArea from "@/components/sharedComponents/TextArea.vue";
+import SalaryInput from "@/components/sharedComponents/SalaryInput.vue";
 import Dropzone from "@/components/dropzone/DropzoneComp.vue";
-import SalaryInput from "@/components/SalaryInput.vue";
 import {
   INPUT_TEXT,
   INPUT_SALARY,

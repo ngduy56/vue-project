@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 import DropzoneElement from "./DropzoneElement.vue";
 import FileElement from "./FileElement.vue";
 export default {

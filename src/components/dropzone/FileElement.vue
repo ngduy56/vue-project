@@ -44,7 +44,7 @@ export default {
 <style scoped>
 .file-block {
   width: 100%;
-  margin-top: 33px;
+  margin-top: 16px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

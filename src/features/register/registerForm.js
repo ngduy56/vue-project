@@ -14,6 +14,7 @@ import {
   MAX_LENGTH_NUMBER,
   INPUT_DROPDOWN_SEARCH,
   POSITION_LIST,
+  MAX_LENGTH_PASSWORD,
 } from "@/constants/registerFormConstants";
 const accountForm = [
   {
@@ -29,19 +30,21 @@ const accountForm = [
     label: "Password",
     view_type: INPUT_TEXT,
     key: "password",
+    type: "password",
     required: true,
     value: "",
     error: "",
-    maxLength: MAX_LENGTH,
+    maxLength: MAX_LENGTH_PASSWORD,
   },
   {
     label: "Repeat Password",
     view_type: INPUT_TEXT,
-    key: "repeat-password",
+    key: "re-password",
+    type: "password",
     required: true,
     value: "",
     error: "",
-    maxLength: MAX_LENGTH,
+    maxLength: MAX_LENGTH_PASSWORD,
   },
 ];
 const profileForm = [
@@ -118,7 +121,7 @@ const finishedForm = [
     maxLength: MAX_LENGTH_NUMBER,
   },
 ];
-const dynamicForm = [
+const registerForm = [
   {
     id: 1,
     num: 1,
@@ -141,4 +144,4 @@ const dynamicForm = [
     isDone: false,
   },
 ];
-export { dynamicForm };
+export { registerForm };

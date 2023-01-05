@@ -1,11 +1,12 @@
 <template>
   <div class="register__form">
+    <span class="title">{{ title }}</span>
     <StepperForm
       :dynamicForm="dynamicForm"
       :currentStep="currentStep"
       @changeForm="changeForm"
     />
-    <DynamicForm
+    <DynamicContentForm
       :dynamicForm="dynamicForm"
       :formData="formData"
       :currentStep="currentStep"
@@ -21,17 +22,16 @@
 </template>
 
 <script>
-import { dynamicForm } from "@/features/register/dynamicForm/registerForm";
-import StepperForm from "@/features/register/dynamicForm/StepperForm.vue";
-import DynamicForm from "@/features/register/dynamicForm/DynamicForm.vue";
+import StepperForm from "@/components/dynamicForm/stepper/StepperForm.vue";
+import DynamicContentForm from "@/components/dynamicForm/formContent/DynamicContentForm.vue";
 export default {
   data() {
     return {
       currentStep: 1,
-      dynamicForm,
     };
   },
-  components: { StepperForm, DynamicForm },
+  props: ["title", "dynamicForm"],
+  components: { StepperForm, DynamicContentForm },
   computed: {
     formData() {
       const activeStep = this.dynamicForm.find(
@@ -152,8 +152,7 @@ export default {
     nextStep() {
       if (this.isLastForm) {
         const data = this.filterValue(this.dynamicForm);
-        console.log(data);
-        this.$router.push({ path: "/" });
+        this.$emit("onChange", data);
         this.resetForm();
       }
       if (!this.isLastForm) {
@@ -188,14 +187,18 @@ export default {
 .register__form {
   width: 596px;
   max-height: 683px;
-
   position: absolute;
-  flex-direction: column;
-  gap: 24px;
 
   padding: 24px 32px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+
+  .title {
+    font-size: 32px;
+    color: #333333;
+    font-weight: 700;
+    line-height: 39px;
+  }
 }
 </style>

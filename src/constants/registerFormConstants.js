@@ -96,6 +96,7 @@ const COMPANY_ITEM = "company-item";
 const NUMBER_REGEX = /^\d+$/;
 const ZERO_REGEX = /^0+/;
 const MAX_LENGTH = 100;
+const MAX_LENGTH_PASSWORD = 20;
 const MAX_LENGTH_AREA = 1000;
 const MAX_LENGTH_NUMBER = 10;
 export {
@@ -116,4 +117,5 @@ export {
   MAX_LENGTH,
   MAX_LENGTH_AREA,
   MAX_LENGTH_NUMBER,
+  MAX_LENGTH_PASSWORD,
 };

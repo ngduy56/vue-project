@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 
 export default {
   data() {
