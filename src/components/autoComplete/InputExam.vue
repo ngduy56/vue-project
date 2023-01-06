@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <div @click="showDropdown" v-click-outside="hideDropdown">
-      <div class="search-block" :class="{ 'is-focused': isFocused }">
+      <div
+        class="search-block"
+        :class="{ 'is-focused': isFocused, 'is-empty': isEmpty }"
+      >
         <SearchIcon />
         <div class="chosen-list">
           <ChosenItem
@@ -19,6 +22,11 @@
       </div>
       <div class="option-block">
         <div v-if="isFocused" class="option-list">
+          <OptionItem
+            v-if="isEmpty"
+            :isEmpty="isEmpty"
+            :optionItem="optionItem"
+          />
           <OptionItem
             v-for="optionItem in optionList"
             :key="optionItem.code"
@@ -41,6 +49,10 @@ export default {
   data() {
     return {
       isFocused: false,
+      isEmpty: false,
+      optionItem: {
+        name: "No result found!",
+      },
     };
   },
   props: {
@@ -58,6 +70,14 @@ export default {
     ChosenItem,
     OptionItem,
     SearchInput,
+  },
+  watch: {
+    optionList: {
+      handler(val) {
+        this.isEmpty = val.length === 0;
+      },
+    },
+    deep: true,
   },
   mounted() {
     this.optionList.forEach((item) => {
@@ -104,6 +124,9 @@ export default {
 }
 .is-focused {
   border-color: #1991d2;
+}
+.is-empty {
+  border-color: red;
 }
 .search-icon {
   min-width: 24px;

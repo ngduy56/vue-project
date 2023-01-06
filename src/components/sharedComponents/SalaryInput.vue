@@ -74,6 +74,7 @@ export default {
       outline: none;
       border: none;
       padding: 10px 0 10px 8px;
+      font-size: 14px;
     }
 
     span {

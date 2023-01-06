@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="login-container">
     <div class="authentication">
       <AuthRegister />
       <LoginForm />
@@ -10,6 +10,7 @@
 <script>
 import LoginForm from "@/features/login/LoginForm.vue";
 import AuthRegister from "@/components/AuthRegister.vue";
+
 export default {
   components: {
     LoginForm,
@@ -20,7 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss";
-.container {
+.login-container {
   @include flex(center, center);
   width: 100%;
   height: 100vh;

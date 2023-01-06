@@ -1,10 +1,17 @@
 <template>
   <div id="app">
     <router-view />
+    <LoadingSpiner v-if="false" />
   </div>
 </template>
 <script>
-export default {};
+import LoadingSpiner from "@/components/loading/LoadingSpinner.vue";
+
+export default {
+  components: {
+    LoadingSpiner,
+  },
+};
 </script>
 
 <style>

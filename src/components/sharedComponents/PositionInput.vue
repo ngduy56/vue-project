@@ -49,6 +49,9 @@ export default {
   },
   methods: {
     changeFilterName(filterName) {
+      if (!this.filterOptions.length) {
+        console.log("haha");
+      }
       this.filterName = filterName;
     },
     onAddChosen(option) {

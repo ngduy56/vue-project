@@ -152,8 +152,8 @@ export default {
     nextStep() {
       if (this.isLastForm) {
         const data = this.filterValue(this.dynamicForm);
-        this.$emit("onChange", data);
-        this.resetForm();
+        this.$emit("onSubmit", data);
+        // this.resetForm();
       }
       if (!this.isLastForm) {
         this.doneStep(this.currentStep);

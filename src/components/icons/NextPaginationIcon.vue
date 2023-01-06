@@ -19,4 +19,8 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+svg {
+  cursor: pointer;
+}
+</style>

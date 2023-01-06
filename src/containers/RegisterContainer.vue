@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="register-container">
     <div class="authentication">
       <AuthRegister />
       <RegisterForm
         :title="title"
         :dynamicForm="registerForm"
-        @onChange="onChange"
+        @onSubmit="onSubmit"
       />
     </div>
   </div>
@@ -28,9 +28,8 @@ export default {
     AuthRegister,
   },
   methods: {
-    onChange(data) {
-      this.$router.push({ path: "/home" });
-      console.log(data);
+    onSubmit(data) {
+      this.$emit("onSubmit", data);
     },
   },
 };
@@ -38,7 +37,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss";
-.container {
+.register-container {
   @include flex(center, center);
   width: 100%;
   height: 100vh;

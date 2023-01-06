@@ -13,8 +13,8 @@ export const routes = [
     component: HomePage,
 
     children: [
-      { path: "", name: "request", component: RequestContainer },
-      { path: "requests", name: "request", component: RequestContainer },
+      { path: "", name: "requests", component: RequestContainer },
+      { path: "requests", name: "requests", component: RequestContainer },
       {
         path: "requests:id",
         name: "requestDetail",

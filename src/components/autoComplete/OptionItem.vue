@@ -1,7 +1,7 @@
 <template>
   <div
     class="option-item"
-    :class="{ 'is-chosen': optionItem.isChosen }"
+    :class="{ 'is-chosen': optionItem.isChosen, 'is-empty': isEmpty }"
     @click="addChosen"
   >
     {{ name }}
@@ -14,6 +14,10 @@ export default {
     optionItem: {
       type: Object,
       required: true,
+    },
+    isEmpty: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -50,5 +54,8 @@ export default {
 .is-chosen {
   background-color: #617d98;
   color: #ffffff;
+}
+.is-empty {
+  color: red;
 }
 </style>

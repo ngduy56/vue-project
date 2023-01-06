@@ -15,11 +15,7 @@ export default {
       filterName: "",
     };
   },
-  props: {
-    placeholder: {
-      type: String,
-    },
-  },
+  props: ["placeholder"],
   methods: {
     onChange() {
       this.$emit("input", this.filterName);
@@ -31,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .input-search {
   min-width: 120px;
   width: 100%;
@@ -45,10 +41,11 @@ export default {
   background-color: transparent;
   caret-color: #1991d2;
   flex: 1;
-}
-.input-search::placeholder {
-  color: #bfbfbf;
-  font-size: 14px;
-  font-weight: 400;
+
+  &::placeholder {
+    color: #bfbfbf;
+    font-size: 14px;
+    font-weight: 400;
+  }
 }
 </style>
