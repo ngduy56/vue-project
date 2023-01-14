@@ -1,16 +1,45 @@
 <template>
   <div class="pagi__info">
-    <span>1~10 trong tổng cộng 21 bản ghi</span>
-    <NextPaginationIcon />
+    <BackPaginationIcon @click.native="prePage(pageNum)" />
+    <span>1 ~ {{ limit }} trong tổng cộng {{ total }} bản ghi</span>
+    <NextPaginationIcon @click.native="nextPage(pageNum)" />
   </div>
 </template>
 
 <script>
 import NextPaginationIcon from "@/components/icons/NextPaginationIcon.vue";
+import BackPaginationIcon from "@/components/icons/BackPaginationIcon.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     NextPaginationIcon,
+    BackPaginationIcon,
+  },
+  computed: {
+    ...mapGetters({
+      total: "authentication/total",
+      limit: "authentication/limit",
+      pageNum: "authentication/pageNum",
+      totalPage: "authentication/totalPage",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      changePage: "authentication/changePage",
+    }),
+    prePage(page) {
+      let currentPage = page - 1;
+      if (currentPage >= 1) {
+        this.changePage(currentPage);
+      }
+    },
+    nextPage(page) {
+      let currentPage = page + 1;
+      if (currentPage <= this.totalPage) {
+        this.changePage(currentPage);
+      }
+    },
   },
 };
 </script>

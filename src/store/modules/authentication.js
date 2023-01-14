@@ -5,13 +5,13 @@ const state = () => ({
   user: {},
   currentUser: {},
   avatarUser: "",
-  total: [],
-  totalPage: 1,
-  pageNum: 1,
-  limit: 1,
   userList: [],
   loading: false,
   logged: false,
+
+  total: [],
+  pageNum: 1,
+  limit: 2,
 });
 const getters = {
   user: (state) => state.user,
@@ -19,8 +19,11 @@ const getters = {
   userList: (state) => state.userList,
   loading: (state) => state.loading,
   logged: (state) => state.logged,
+
+  limit: (state) => state.limit,
+  total: (state) => state.total.length,
   pageNum: (state) => state.pageNum,
-  totalPageNum: (state) => Math.ceil(state.total.length / state.limit),
+  totalPage: (state) => Math.ceil(state.total.length / state.limit),
 };
 const mutations = {
   SET_LOADING(state, status) {
@@ -43,6 +46,7 @@ const mutations = {
     state.avatarUser = avatar;
   },
   CHANGE_PAGE(state, page) {
+    console.log(page);
     state.pageNum = page;
     let statIndex = state.limit * (state.pageNum - 1);
     let endIndex = statIndex + state.limit;
