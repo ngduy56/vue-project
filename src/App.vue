@@ -1,15 +1,24 @@
 <template>
   <div id="app">
     <router-view />
-    <LoadingSpiner v-if="false" />
+    <LoadingSpiner v-if="loading" />
+    <ToastMessage />
   </div>
 </template>
 <script>
 import LoadingSpiner from "@/components/loading/LoadingSpinner.vue";
+import ToastMessage from "@/components/toast/ToastMessage.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     LoadingSpiner,
+    ToastMessage,
+  },
+  computed: {
+    ...mapGetters({
+      loading: "authentication/loading",
+    }),
   },
 };
 </script>

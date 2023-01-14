@@ -13,7 +13,7 @@
           <p>Drag & Drop</p>
           <p>Or Click here</p>
           <input
-            multiple
+            :multiple="multiple"
             type="file"
             ref="file"
             class="dropzone-file"
@@ -43,6 +43,10 @@ export default {
     UploadIcon,
   },
   props: {
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
     maxSize: {
       type: Number,
       required: true,

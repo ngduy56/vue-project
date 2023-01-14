@@ -14,7 +14,7 @@
             @removeChosen="removeChosen"
           />
           <SearchInput
-            :placeholder="'Select position that you want'"
+            :placeholder="placeholder"
             @input="changeFilterName"
             @focusInput="showDropdown"
           />
@@ -71,6 +71,11 @@ export default {
     OptionItem,
     SearchInput,
   },
+  mounted() {
+    this.optionList.forEach((item) => {
+      item.isChosen = false;
+    });
+  },
   watch: {
     optionList: {
       handler(val) {
@@ -79,10 +84,10 @@ export default {
     },
     deep: true,
   },
-  mounted() {
-    this.optionList.forEach((item) => {
-      item.isChosen = false;
-    });
+  computed: {
+    placeholder() {
+      return this.chosenList.length ? "" : "Select position that you want";
+    },
   },
   methods: {
     addChosen(optionItem) {

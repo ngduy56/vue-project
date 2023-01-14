@@ -11,15 +11,14 @@ export const routes = [
     path: "/home",
     name: "HomePage",
     component: HomePage,
-
     children: [
-      { path: "", name: "requests", component: RequestContainer },
-      { path: "requests", name: "requests", component: RequestContainer },
+      { path: "users", name: "users", component: RequestContainer },
       {
-        path: "requests:id",
-        name: "requestDetail",
+        path: "users/:id",
+        name: "userDetail",
         component: DetailContainer,
       },
     ],
   },
+  { path: "*", redirect: "/" },
 ];

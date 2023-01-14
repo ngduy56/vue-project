@@ -1,12 +1,22 @@
 <template>
   <div class="actions">
-    <button class="btn__approve">Approve</button>
-    <button class="btn__reject">Reject</button>
+    <button class="btn__approve" @click="approve">Approve</button>
+    <button class="btn__reject" @click="reject">Reject</button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    approve() {
+      let isApproved = true;
+      this.$emit("approve", isApproved);
+    },
+    reject() {
+      this.$emit("reject");
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

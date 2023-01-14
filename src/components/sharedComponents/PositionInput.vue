@@ -1,5 +1,6 @@
 <template>
   <div class="position-input">
+    <div v-if="readonly" class="overlay"></div>
     <InputLabel :label="label" :required="required" />
     <span class="note">Can select multiple</span>
     <InputExam
@@ -36,6 +37,10 @@ export default {
     label: {
       type: String,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     required: {
       type: Boolean,
     },
@@ -49,9 +54,6 @@ export default {
   },
   methods: {
     changeFilterName(filterName) {
-      if (!this.filterOptions.length) {
-        console.log("haha");
-      }
       this.filterName = filterName;
     },
     onAddChosen(option) {
@@ -67,6 +69,14 @@ export default {
 <style lang="scss" scoped>
 .position-input {
   position: relative;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 450px;
+  height: 50%;
+  z-index: 9;
 }
 .note {
   font-weight: 400;

@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     changeForm() {
-      this.$emit("changeForm", this.item.num);
+      this.$emit("changeForm");
+      // this.$emit("changeForm", this.item.num);
     },
   },
 };

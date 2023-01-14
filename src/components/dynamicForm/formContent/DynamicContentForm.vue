@@ -7,7 +7,7 @@
         :item="item"
         :value="item.value"
         @input="(value) => onChangeValue(value, index)"
-        @onUploadFile="onUploadFile"
+        @onUploadFile="(files) => onUploadFile(files, index)"
         @onRemoveFile="onRemoveFile"
         @onAddChosen="onAddChosen"
         @onRemoveChosen="onRemoveChosen"
@@ -42,8 +42,14 @@ import {
   checkSalary,
 } from "@/utils/ValidateForm";
 import { INPUT_DATE, INPUT_SALARY } from "@/constants/registerFormConstants";
+import toast from "@/components/toast/toast";
 
 export default {
+  data() {
+    return {
+      toast,
+    };
+  },
   props: {
     dynamicForm: {
       type: Array,
@@ -83,6 +89,9 @@ export default {
     currentStep: {
       handler() {
         this.isValid = false;
+        this.formData.forEach((item) => {
+          item.error = "";
+        });
       },
       deep: true,
     },
@@ -91,8 +100,8 @@ export default {
     onChangeValue(value, index) {
       this.$emit("input", value, index);
     },
-    onUploadFile(files) {
-      this.$emit("onUploadFile", files);
+    onUploadFile(files, index) {
+      this.$emit("onUploadFile", files, index);
     },
     onRemoveFile(lastModified) {
       this.$emit("onRemoveFile", lastModified);
@@ -134,7 +143,12 @@ export default {
       if (this.isValid) {
         this.$emit("nextStep");
       } else {
-        console.log("co loi");
+        toast.addToast({
+          title: "Error register",
+          type: "error",
+          message: "Something ís wrong. Please check again!",
+          duration: 2000,
+        });
       }
     },
     prevStep() {
@@ -161,6 +175,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 15.85px;
 
     padding: 16px;
     background: #ffffff;

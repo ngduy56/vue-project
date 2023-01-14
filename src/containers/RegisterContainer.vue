@@ -13,7 +13,7 @@
 
 <script>
 import RegisterForm from "@/components/dynamicForm/DynamicForm.vue";
-import AuthRegister from "@/components/AuthRegister.vue";
+import AuthRegister from "@/components/sharedComponents/AuthRegister.vue";
 import { registerForm } from "@/features/register/registerForm";
 
 export default {

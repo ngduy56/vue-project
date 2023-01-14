@@ -2,13 +2,14 @@
   <div class="main">
     <InputLabel v-if="label" :label="label" :required="required" />
     <DropzoneElement
-      @onUpload="onUpload"
-      :maxSize="maxSize"
+      :multiple="multiple"
       :maxNumber="maxNumber"
+      :maxSize="maxSize"
       :typeFile="typeFile"
+      @onUpload="onUpload"
     />
     <FileElement
-      v-if="fileList.length > 0"
+      v-if="fileList && fileList.length > 0"
       :fileList="fileList"
       @onRemove="onRemove"
     />
@@ -21,15 +22,17 @@ import DropzoneElement from "./DropzoneElement.vue";
 import FileElement from "./FileElement.vue";
 export default {
   props: {
+    multiple: {
+      type: Boolean,
+    },
     label: {
-      type: [String, undefined],
+      type: String,
     },
     required: {
       type: Boolean,
     },
     fileList: {
       type: Array,
-      required: true,
     },
     maxSize: {
       type: Number,

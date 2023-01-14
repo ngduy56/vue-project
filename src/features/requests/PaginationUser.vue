@@ -22,6 +22,9 @@ export default {
   justify-content: flex-end;
   padding: 25px 10px 25px 25px;
   gap: 65px;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
 
   span {
     font-weight: 400;

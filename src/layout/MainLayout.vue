@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <LeftSidebar />
+    <LeftSidebar :user="user" @logout="logoutUser" />
     <div class="container">
       <router-view />
     </div>
@@ -9,9 +9,48 @@
 
 <script>
 import LeftSidebar from "@/components/sharedComponents/LeftSidebar.vue";
+import { mapActions, mapGetters } from "vuex";
+import { getUserId } from "@/utils/localStorage";
+import toast from "@/components/toast/toast";
+
 export default {
+  data() {
+    return {
+      toast,
+    };
+  },
   components: {
     LeftSidebar,
+  },
+  watch: {
+    logged() {
+      if (!this.logged) {
+        this.$router.push({ path: "/" });
+      }
+    },
+  },
+  async created() {
+    let id = getUserId();
+    if (id) {
+      await this.setLogged(true);
+      await this.getUser({ id: id, reload: true });
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: "authentication/user",
+      logged: "authentication/logged",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      logout: "authentication/logout",
+      getUser: "authentication/getUser",
+      setLogged: "authentication/setLogged",
+    }),
+    logoutUser() {
+      this.logout();
+    },
   },
 };
 </script>
@@ -21,9 +60,10 @@ export default {
   display: flex;
 
   .container {
+    position: relative;
+    height: 100vh;
     flex: 1;
     padding: 48px 32px;
-    background: rgb(169, 219, 252);
   }
 }
 </style>

@@ -8,6 +8,7 @@
     <input
       class="input"
       type="date"
+      :readonly="readonly"
       :class="{ 'in-valid': error }"
       v-model="valueLocal"
       @input="onChange"
@@ -37,6 +38,10 @@ export default {
       type: Number,
       default: 450,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     label: {
       type: String,
     },
@@ -65,7 +70,6 @@ export default {
 .input-date {
   display: flex;
   flex-direction: column;
-
   .input {
     font-family: "Inter", sans-serif;
     width: 130px;

@@ -2,19 +2,24 @@
   <div class="login-container">
     <div class="authentication">
       <AuthRegister />
-      <LoginForm />
+      <LoginForm @onSubmit="onSubmit" />
     </div>
   </div>
 </template>
 
 <script>
 import LoginForm from "@/features/login/LoginForm.vue";
-import AuthRegister from "@/components/AuthRegister.vue";
+import AuthRegister from "@/components/sharedComponents/AuthRegister.vue";
 
 export default {
   components: {
     LoginForm,
     AuthRegister,
+  },
+  methods: {
+    onSubmit(data) {
+      this.$emit("onSubmit", data);
+    },
   },
 };
 </script>

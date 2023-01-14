@@ -4,6 +4,7 @@
     <select
       class="select"
       :class="{ 'in-valid': error }"
+      :disabled="readonly"
       v-model="valueLocal"
       @change="onChange"
     >
@@ -35,6 +36,10 @@ export default {
   props: {
     list: {
       type: Array,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
     label: {
       type: String,

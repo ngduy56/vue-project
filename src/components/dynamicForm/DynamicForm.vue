@@ -59,15 +59,14 @@ export default {
       }
       return isValid;
     },
-    onUploadFile(files) {
-      this.formData.map((item) => {
-        if (item.key === "avatar") {
-          let isValid = this.checkFileValue(files, item.value);
-          if (isValid) {
-            item.value = item.value.concat(files);
-          }
-        }
-      });
+    onUploadFile(files, index) {
+      let item = this.formData[index];
+      let isValid = this.checkFileValue(files, item.value);
+      if (isValid && item.multiple) {
+        item.value = item.value.concat(files);
+      } else if (isValid && !item.multiple) {
+        item.value = files;
+      }
     },
     onRemoveFile(lastModified) {
       this.formData.map((item) => {
@@ -153,7 +152,7 @@ export default {
       if (this.isLastForm) {
         const data = this.filterValue(this.dynamicForm);
         this.$emit("onSubmit", data);
-        // this.resetForm();
+        this.resetForm();
       }
       if (!this.isLastForm) {
         this.doneStep(this.currentStep);

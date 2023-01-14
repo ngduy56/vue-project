@@ -1,9 +1,4 @@
 import {
-  MAX_NUMBER,
-  MAX_SIZE,
-  TYPE_FILE_IMAGE,
-} from "@/constants/dropzoneConstants";
-import {
   INPUT_TEXT,
   INPUT_DATE,
   MAX_LENGTH,
@@ -14,11 +9,12 @@ import {
   MAX_LENGTH_NUMBER,
   INPUT_DROPDOWN_SEARCH,
   POSITION_LIST,
-  MAX_LENGTH_PASSWORD,
+  AVATAR_IMG,
 } from "@/constants/registerFormConstants";
-const accountForm = [
+const profileForm = [
   {
     label: "Username",
+    readonly: true,
     view_type: INPUT_TEXT,
     key: "username",
     required: true,
@@ -27,29 +23,8 @@ const accountForm = [
     maxLength: MAX_LENGTH,
   },
   {
-    label: "Password",
-    view_type: INPUT_TEXT,
-    key: "password",
-    type: "password",
-    required: true,
-    value: "",
-    error: "",
-    maxLength: MAX_LENGTH_PASSWORD,
-  },
-  {
-    label: "Repeat Password",
-    view_type: INPUT_TEXT,
-    key: "re-password",
-    type: "password",
-    required: true,
-    value: "",
-    error: "",
-    maxLength: MAX_LENGTH_PASSWORD,
-  },
-];
-const profileForm = [
-  {
     label: "Fullname",
+    readonly: true,
     view_type: INPUT_TEXT,
     required: true,
     value: "",
@@ -59,6 +34,7 @@ const profileForm = [
   },
   {
     label: "Birthday",
+    readonly: true,
     view_type: INPUT_DATE,
     required: true,
     value: "",
@@ -67,6 +43,7 @@ const profileForm = [
   },
   {
     label: "City",
+    readonly: true,
     view_type: "input-dropdown",
     required: false,
     value: "",
@@ -75,6 +52,7 @@ const profileForm = [
   },
   {
     label: "Position",
+    readonly: true,
     view_type: INPUT_DROPDOWN_SEARCH,
     required: false,
     key: "position",
@@ -83,6 +61,7 @@ const profileForm = [
   },
   {
     label: "Describe Yourself",
+    readonly: true,
     view_type: INPUT_AREA,
     required: false,
     value: "",
@@ -92,18 +71,16 @@ const profileForm = [
   },
   {
     label: "Avatar (only one)",
-    view_type: "img-dropzone",
+    view_type: AVATAR_IMG,
     required: false,
-    value: [],
+    value: "",
     key: "avatar",
-    maxSize: MAX_SIZE,
-    maxNumber: MAX_NUMBER,
-    typeFile: TYPE_FILE_IMAGE,
   },
 ];
 const finishedForm = [
   {
     label: "Reason",
+    readonly: true,
     view_type: INPUT_AREA,
     required: true,
     value: "",
@@ -113,6 +90,7 @@ const finishedForm = [
   },
   {
     label: "Wish salary",
+    readonly: true,
     view_type: INPUT_SALARY,
     required: true,
     value: "",
@@ -121,28 +99,20 @@ const finishedForm = [
     maxLength: MAX_LENGTH_NUMBER,
   },
 ];
-
-const registerForm = [
+const registerDataForm = [
   {
     id: 1,
     num: 1,
-    data: accountForm,
-    name: "Account",
-    isDone: false,
+    name: "Profile",
+    data: profileForm,
+    isDone: true,
   },
   {
     id: 2,
     num: 2,
-    name: "Profile",
-    data: profileForm,
-    isDone: false,
-  },
-  {
-    id: 3,
-    num: 3,
     data: finishedForm,
     name: "Finished",
-    isDone: false,
+    isDone: true,
   },
 ];
-export { registerForm };
+export { registerDataForm };

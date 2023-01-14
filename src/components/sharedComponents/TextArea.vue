@@ -2,6 +2,7 @@
   <div class="area-block">
     <InputLabel :label="label" :required="required" />
     <textarea
+      :readonly="readonly"
       :class="{ 'in-valid': error }"
       v-model="valueLocal"
       @input="onChange"
@@ -37,6 +38,10 @@ export default {
     InputLabel,
   },
   props: {
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     label: {
       type: String,
     },

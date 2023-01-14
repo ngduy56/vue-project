@@ -7,7 +7,7 @@
         :key="item.num"
         :item="item"
         :currentStep="currentStep"
-        @changeForm="changeForm"
+        @changeForm="changeForm(item.num)"
       />
     </div>
   </div>
@@ -27,7 +27,9 @@ export default {
   },
   methods: {
     changeForm(num) {
-      this.$emit("changeForm", num);
+      if (this.dynamicForm[num - 1].isDone) {
+        this.$emit("changeForm", num);
+      }
     },
   },
 };

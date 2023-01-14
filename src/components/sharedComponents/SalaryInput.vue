@@ -2,8 +2,13 @@
   <div class="salary-block">
     <InputLabel :label="label" :required="required" />
     <div class="salary-input" :class="{ 'in-valid': error }">
-      <input type="text" v-model="valueLocal" @input="onChange" />
-      <span>VNĐ</span>
+      <input
+        type="text"
+        :readonly="readonly"
+        v-model="valueLocal"
+        @input="onChange"
+      />
+      <span>VND</span>
     </div>
     <span v-if="error" class="error-vali">{{ error }}</span>
   </div>
@@ -19,6 +24,10 @@ export default {
     };
   },
   props: {
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     label: {
       type: String,
     },

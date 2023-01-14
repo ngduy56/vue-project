@@ -9,6 +9,7 @@
       :class="{ 'in-valid': error }"
       :type="type"
       :style="{ width: `${width}px` }"
+      :readonly="readonly"
       :placeholder="placeholder"
       v-model="valueLocal"
       @input="onChange"
@@ -40,6 +41,10 @@ export default {
   props: {
     value: {
       type: String,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
     width: {
       type: Number,

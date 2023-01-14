@@ -4,7 +4,10 @@
       v-if="item.view_type === INPUT_TEXT"
       :value="valueLocal"
       :type="item.type"
+      :readonly="item.readonly"
       :label="item.label"
+      :placeholder="item.placeholder"
+      :width="item.width"
       :required="item.required"
       :maxLength="item.maxLength"
       :error="item.error"
@@ -14,6 +17,7 @@
       v-if="item.view_type === INPUT_DATE"
       :value="valueLocal"
       :label="item.label"
+      :readonly="item.readonly"
       :required="item.required"
       :error="item.error"
       @input="onChange"
@@ -22,6 +26,7 @@
       v-if="item.view_type === INPUT_DROPDOWN"
       :value="valueLocal"
       :label="item.label"
+      :readonly="item.readonly"
       :list="item.cityList"
       :required="item.required"
       @input="onChange"
@@ -29,6 +34,7 @@
     <PositionInput
       v-if="item.view_type === INPUT_DROPDOWN_SEARCH"
       :label="item.label"
+      :readonly="item.readonly"
       :required="item.required"
       :optionList="item.optionList"
       :chosenList="item.value"
@@ -39,6 +45,7 @@
       v-if="item.view_type === INPUT_AREA"
       :value="valueLocal"
       :label="item.label"
+      :readonly="item.readonly"
       :required="item.required"
       :error="item.error"
       :maxLength="item.maxLength"
@@ -47,7 +54,9 @@
     <Dropzone
       v-if="item.view_type === IMG_DROPZONE"
       :label="item.label"
+      :readonly="item.readonly"
       :required="item.required"
+      :multiple="item.multiple"
       :maxNumber="item.maxNumber"
       :maxSize="item.maxSize"
       :typeFile="item.typeFile"
@@ -55,10 +64,18 @@
       @onRemove="onRemoveFile"
       @onUpload="onUploadFile"
     />
+    <AvatarImage
+      v-if="item.view_type === AVATAR_IMG"
+      :label="item.label"
+      :readonly="item.readonly"
+      :required="item.required"
+      :avatar="item.value"
+    />
     <SalaryInput
       v-if="item.view_type === INPUT_SALARY"
       :value="valueLocal"
       :label="item.label"
+      :readonly="item.readonly"
       :required="item.required"
       :error="item.error"
       @input="onChange"
@@ -73,6 +90,7 @@ import DropdownList from "@/components/sharedComponents/DropdownList.vue";
 import PositionInput from "@/components/sharedComponents/PositionInput.vue";
 import AboutArea from "@/components/sharedComponents/TextArea.vue";
 import SalaryInput from "@/components/sharedComponents/SalaryInput.vue";
+import AvatarImage from "@/components/sharedComponents/AvatarImage.vue";
 import Dropzone from "@/components/dropzone/DropzoneComp.vue";
 import {
   INPUT_TEXT,
@@ -81,6 +99,7 @@ import {
   INPUT_DROPDOWN,
   INPUT_DROPDOWN_SEARCH,
   INPUT_AREA,
+  AVATAR_IMG,
   IMG_DROPZONE,
 } from "@/constants/registerFormConstants";
 export default {
@@ -93,6 +112,7 @@ export default {
       INPUT_DROPDOWN_SEARCH,
       INPUT_AREA,
       IMG_DROPZONE,
+      AVATAR_IMG,
 
       valueLocal: "",
     };
@@ -113,6 +133,7 @@ export default {
     PositionInput,
     AboutArea,
     SalaryInput,
+    AvatarImage,
     Dropzone,
   },
   watch: {
@@ -146,12 +167,7 @@ export default {
 
 <style lang="scss" scoped>
 .block {
-  width: 100%;
   position: relative;
-  margin-top: 15.85px;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  width: 100%;
 }
 </style>

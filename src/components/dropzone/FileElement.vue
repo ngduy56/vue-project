@@ -21,7 +21,6 @@ export default {
   props: {
     fileList: {
       type: Array,
-      required: true,
     },
   },
   components: {

@@ -8,43 +8,25 @@
         <th>Create at</th>
         <th>Status</th>
       </tr>
-      <tr>
-        <td><UserItem /></td>
-        <td>Ha Noi</td>
-        <td>16.000.000 đ</td>
-        <td>2022/10/04 <br />10:01</td>
-        <td><span class="pending">Pending</span></td>
-      </tr>
-      <tr>
-        <td><UserItem /></td>
-        <td>Da Nang</td>
-        <td>16.000.000 đ</td>
-        <td>2022/10/04 <br />10:01</td>
-        <td><span class="approved">Approved</span></td>
-      </tr>
-      <tr>
-        <td><UserItem /></td>
-        <td>Ho Chi Minh</td>
-        <td>16.000.000 đ</td>
-        <td>2022/10/04 <br />10:01</td>
-        <td><span class="rejected">Rejected</span></td>
-      </tr>
+      <UserRowItem v-for="user in userList" :key="user.name" :user="user" />
     </table>
   </div>
 </template>
 
 <script>
-import UserItem from "@/features/requests/UserItem.vue";
+import UserRowItem from "@/features/requests/UserRowItem.vue";
 export default {
+  props: ["userList"],
   components: {
-    UserItem,
+    UserRowItem,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .user__list {
-  height: 672px;
+  width: 100%;
+  min-height: calc(100% - 70px);
 
   table {
     border-collapse: collapse;
@@ -63,40 +45,11 @@ export default {
         padding-left: 54px;
       }
       &:last-child {
-        // padding-right: 50px;
         text-align: center;
       }
     }
-    td {
-      text-align: left;
-      padding: 7.5px 10px;
-      font-size: 14px;
-      &:first-child {
-        padding-left: 54px;
-      }
-      &:last-child {
-        // padding-right: 50px;
-        text-align: center;
-      }
-    }
-    tr:last-child {
-      border-bottom: 2px solid #e4e7eb;
-    }
-    span {
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-    .pending {
-      background: #fffbeb;
-      color: #dd901d;
-    }
-    .approved {
-      background: #f0f4f8;
-      color: #627d98;
-    }
-    .rejected {
-      background: #ffe3e3;
-      color: #f86a6a;
+    tr:nth-child(3n + 1) {
+      border-bottom: 1px solid #e4e7eb;
     }
   }
 }

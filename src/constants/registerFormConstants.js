@@ -43,23 +43,23 @@ const CITY_LIST = [
   },
   {
     name: "Ha Noi",
-    value: "hanoi",
+    value: "Ha Noi",
   },
   {
     name: "Da Nang",
-    value: "danang",
+    value: "Da Nang",
   },
   {
     name: "Hue",
-    value: "hue",
+    value: "Hue",
   },
   {
     name: "Da Lat",
-    value: "dalat",
+    value: "Da Lat",
   },
   {
     name: "Ho Chi Minh",
-    value: "hochiminh",
+    value: "Ho Chi Minh",
   },
 ];
 const COMPANY_LIST = [
@@ -92,6 +92,7 @@ const INPUT_DROPDOWN = "input-dropdown";
 const INPUT_DROPDOWN_SEARCH = "input-dropdown-search";
 const INPUT_AREA = "input-area";
 const IMG_DROPZONE = "img-dropzone";
+const AVATAR_IMG = "avatar-img";
 const COMPANY_ITEM = "company-item";
 const NUMBER_REGEX = /^\d+$/;
 const ZERO_REGEX = /^0+/;
@@ -118,4 +119,5 @@ export {
   MAX_LENGTH_AREA,
   MAX_LENGTH_NUMBER,
   MAX_LENGTH_PASSWORD,
+  AVATAR_IMG,
 };
