@@ -15,6 +15,7 @@ import {
   INPUT_DROPDOWN_SEARCH,
   POSITION_LIST,
   MAX_LENGTH_PASSWORD,
+  IMG_DROPZONE,
 } from "@/constants/registerFormConstants";
 const accountForm = [
   {
@@ -92,7 +93,7 @@ const profileForm = [
   },
   {
     label: "Avatar (only one)",
-    view_type: "img-dropzone",
+    view_type: IMG_DROPZONE,
     required: false,
     value: [],
     key: "avatar",

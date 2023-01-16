@@ -1,9 +1,9 @@
 <template>
   <tr class="item">
     <td><UserItem :user="user" @input="navigateDetail" /></td>
-    <td>{{ user.address ? user.address : "No info" }}</td>
-    <td>{{ user.salary ? user.salary : "No info" }}</td>
-    <td>{{ formatDate }}<br />{{ this.formattedHour }}</td>
+    <td>{{ address }}</td>
+    <td>{{ salary }}</td>
+    <td>{{ formatDate }}<br />{{ formattedHour }}</td>
     <td>
       <span v-if="user.status === 0" class="pending">Pending</span>
       <span v-if="user.status === 1" class="approved">Approved</span>
@@ -23,6 +23,12 @@ export default {
   },
   props: ["user"],
   computed: {
+    address() {
+      return this.user.address ? this.user.address : "No info";
+    },
+    salary() {
+      return this.user.salary ? this.user.salary : "No info";
+    },
     formatDate() {
       return this.convertDate(this.user.created_at);
     },

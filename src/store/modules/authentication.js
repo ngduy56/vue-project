@@ -1,24 +1,24 @@
 import axiosClient from "@/axios/axiosClient";
 import { setUserId, removeUserId } from "@/utils/localStorage";
 import toast from "@/components/toast/toast";
+import { router } from "@/router";
+
 const state = () => ({
   user: {},
   currentUser: {},
   avatarUser: "",
   userList: [],
   loading: false,
-  logged: false,
 
   total: [],
   pageNum: 1,
-  limit: 2,
+  limit: 3,
 });
 const getters = {
   user: (state) => state.user,
   currentUser: (state) => state.currentUser,
   userList: (state) => state.userList,
   loading: (state) => state.loading,
-  logged: (state) => state.logged,
 
   limit: (state) => state.limit,
   total: (state) => state.total.length,
@@ -28,9 +28,6 @@ const getters = {
 const mutations = {
   SET_LOADING(state, status) {
     state.loading = status;
-  },
-  SET_LOGGED(state, status) {
-    state.logged = status;
   },
   SET_USER(state, user) {
     state.user = user;
@@ -96,9 +93,7 @@ const actions = {
       const response = await axiosClient.post("/auth/signup", registerForm);
       console.log(response);
       if (response) {
-        commit("SET_LOGGED", true);
-        commit("SET_USER", response.data);
-        setUserId(response.data.id);
+        // commit("SET_USER", response.data);
         commit("SET_LOADING", false);
         toast.addToast({
           title: "Success Register",
@@ -107,6 +102,7 @@ const actions = {
           message: response.message,
           duration: 2000,
         });
+        router.push({ path: "/" });
       }
     } catch (error) {
       console.log(error);
@@ -130,7 +126,6 @@ const actions = {
       const response = await axiosClient.post("/auth/login", loginForm);
       console.log(response);
       if (response) {
-        commit("SET_LOGGED", true);
         commit("SET_USER", response);
         setUserId(response.id);
         commit("SET_LOADING", false);
@@ -141,6 +136,7 @@ const actions = {
           message: "Login successfully!",
           duration: 1000,
         });
+        router.push({ path: "/home/users" });
       }
     } catch (error) {
       commit("SET_LOADING", false);
@@ -153,11 +149,11 @@ const actions = {
       });
     }
   },
-  async getUser({ commit }, { id, reload }) {
+  async getUser({ commit }, { id, isAuthor }) {
     try {
       commit("SET_LOADING", true);
       const response = await axiosClient.get(`/users/${id}`);
-      if (response && reload) {
+      if (response && isAuthor) {
         commit("SET_USER", response);
         commit("SET_LOADING", false);
       } else {
@@ -199,14 +195,11 @@ const actions = {
       console.log(error);
     }
   },
-  setLogged({ commit }, status) {
-    commit("SET_LOGGED", status);
-  },
   logout({ commit }) {
     removeUserId();
-    commit("SET_LOGGED", false);
     commit("SET_USER", {});
     commit("SET_CURRENT_USER", {});
+    router.push({ path: "/" });
   },
 };
 

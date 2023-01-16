@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       toast,
+      isValid: false,
     };
   },
   props: {
@@ -116,6 +117,7 @@ export default {
       this.formData.forEach((item) => {
         item.error = "";
       });
+      this.isValid = false;
       this.formData.forEach((item) => {
         if (item.required) {
           checkRequired(item);

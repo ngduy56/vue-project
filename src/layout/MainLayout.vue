@@ -22,31 +22,21 @@ export default {
   components: {
     LeftSidebar,
   },
-  watch: {
-    logged() {
-      if (!this.logged) {
-        this.$router.push({ path: "/" });
-      }
-    },
-  },
   async created() {
     let id = getUserId();
     if (id) {
-      await this.setLogged(true);
-      await this.getUser({ id: id, reload: true });
+      await this.getUser({ id: id, isAuthor: true });
     }
   },
   computed: {
     ...mapGetters({
       user: "authentication/user",
-      logged: "authentication/logged",
     }),
   },
   methods: {
     ...mapActions({
       logout: "authentication/logout",
       getUser: "authentication/getUser",
-      setLogged: "authentication/setLogged",
     }),
     logoutUser() {
       this.logout();

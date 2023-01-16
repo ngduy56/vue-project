@@ -20,8 +20,9 @@ import toast from "@/components/toast/toast";
 export default {
   data() {
     return {
-      loginForm,
       toast,
+      isValid: false,
+      loginForm,
     };
   },
   components: {
@@ -55,6 +56,7 @@ export default {
       this.loginForm.forEach((item) => {
         item.error = "";
       });
+      this.isValid = false;
       this.loginForm.forEach((item) => {
         if (item.required) {
           checkRequired(item);

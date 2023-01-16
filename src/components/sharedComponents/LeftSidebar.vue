@@ -41,14 +41,14 @@ export default {
   },
   methods: {
     logout() {
-      // toast.addToast({
-      //   title: "Success",
-      //   type: "success",
-      //   position: "top",
-      //   message: "Successfully!",
-      //   duration: 2000,
-      // });
-      this.$emit("logout");
+      toast.addToast({
+        title: "Success",
+        type: "success",
+        position: "bottom-left",
+        message: "Successfully!",
+        duration: 2000,
+      });
+      // this.$emit("logout");
     },
   },
 };

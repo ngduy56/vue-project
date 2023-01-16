@@ -4,22 +4,10 @@
 
 <script>
 import LoginContainer from "@/containers/LoginContainer.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   components: {
     LoginContainer,
-  },
-  computed: {
-    ...mapGetters({
-      logged: "authentication/logged",
-    }),
-  },
-  watch: {
-    logged() {
-      if (this.logged) {
-        this.$router.push({ path: "/home/users" });
-      }
-    },
   },
   methods: {
     ...mapActions({
