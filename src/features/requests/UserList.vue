@@ -2,13 +2,16 @@
   <div class="user__list">
     <table>
       <tr>
-        <th>Fullname</th>
-        <th>City</th>
-        <th>Wish Salary</th>
-        <th>Create at</th>
-        <th>Status</th>
+        <th v-for="heading in headings" :key="heading.lastModified">
+          {{ heading.title }}
+        </th>
       </tr>
-      <UserRowItem v-for="user in userList" :key="user.name" :user="user" />
+      <UserRowItem
+        v-for="user in userList"
+        :key="user.lastModified"
+        :user="user"
+        @navigateDetail="navigateDetail"
+      />
     </table>
   </div>
 </template>
@@ -16,9 +19,25 @@
 <script>
 import UserRowItem from "@/features/requests/UserRowItem.vue";
 export default {
+  data() {
+    return {
+      headings: [
+        { title: "Fullname" },
+        { title: "City" },
+        { title: "Wish Salary" },
+        { title: "Create at" },
+        { title: "Status" },
+      ],
+    };
+  },
   props: ["userList"],
   components: {
     UserRowItem,
+  },
+  methods: {
+    navigateDetail(id) {
+      this.$emit("navigateDetail", id);
+    },
   },
 };
 </script>

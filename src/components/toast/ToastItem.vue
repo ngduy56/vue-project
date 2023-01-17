@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { TOP_RIGHT } from "@/constants/positionConstants.js";
 export default {
   data() {
     return {
@@ -51,7 +52,7 @@ export default {
       this.$emit("remove");
     }, this.duration + 1000);
 
-    if (this.position !== "top-right") {
+    if (this.position !== TOP_RIGHT) {
       this.$emit("changePosition", this.position);
     }
   },

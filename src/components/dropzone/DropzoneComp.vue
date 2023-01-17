@@ -21,32 +21,15 @@ import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 import DropzoneElement from "./DropzoneElement.vue";
 import FileElement from "./FileElement.vue";
 export default {
-  props: {
-    multiple: {
-      type: Boolean,
-    },
-    label: {
-      type: String,
-    },
-    required: {
-      type: Boolean,
-    },
-    fileList: {
-      type: Array,
-    },
-    maxSize: {
-      type: Number,
-      required: true,
-    },
-    maxNumber: {
-      type: Number,
-      required: true,
-    },
-    typeFile: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: [
+    "multiple",
+    "label",
+    "required",
+    "fileList",
+    "maxSize",
+    "maxNumber",
+    "typeFile",
+  ],
   components: {
     DropzoneElement,
     FileElement,

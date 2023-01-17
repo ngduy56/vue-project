@@ -1,28 +1,20 @@
 <template>
   <div class="avatar">
-    <InputLabel v-if="label" :label="label" :required="required" />
+    <InputLabel :label="label" :required="required" />
     <img :src="avatarUser" />
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/sharedComponents/InputLabel.vue";
+import avatarDefault from "@/assets/avatar.png";
+import { BASE_URL } from "@/constants/detailConstants";
+
 export default {
-  props: {
-    avatar: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-    },
-    required: {
-      type: Boolean,
-    },
-  },
+  props: ["label", "readonly", "required", "avatar"],
   computed: {
     avatarUser() {
-      return this.avatar ? `http://localhost:9999/uploads/${this.avatar}` : "";
+      return this.avatar ? `${BASE_URL}${this.avatar}` : avatarDefault;
     },
   },
   components: {

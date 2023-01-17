@@ -1,13 +1,11 @@
 <template>
-  <tr class="item">
-    <td><UserItem :user="user" @input="navigateDetail" /></td>
+  <tr class="item" @click="navigateDetail">
+    <td><UserItem :user="user" /></td>
     <td>{{ address }}</td>
     <td>{{ salary }}</td>
     <td>{{ formatDate }}<br />{{ formattedHour }}</td>
     <td>
-      <span v-if="user.status === 0" class="pending">Pending</span>
-      <span v-if="user.status === 1" class="approved">Approved</span>
-      <span v-if="user.status === 2" class="rejected">Rejected</span>
+      <span :class="statusUser">{{ statusUser }}</span>
     </td>
   </tr>
 </template>
@@ -19,10 +17,18 @@ export default {
   data() {
     return {
       formattedHour: "",
+      status: {
+        0: "pending",
+        1: "approved",
+        2: "rejected",
+      },
     };
   },
   props: ["user"],
   computed: {
+    id() {
+      return this.user.id;
+    },
     address() {
       return this.user.address ? this.user.address : "No info";
     },
@@ -32,11 +38,14 @@ export default {
     formatDate() {
       return this.convertDate(this.user.created_at);
     },
+    statusUser() {
+      return this.status[this.user.status];
+    },
   },
   components: { UserItem },
   methods: {
-    navigateDetail(id) {
-      this.$router.push({ path: `users/${id}` });
+    navigateDetail() {
+      this.$emit("navigateDetail", this.id);
     },
     convertDate(date) {
       let offsetTz = 7 * 60 * 60 * 1000;
@@ -66,6 +75,7 @@ export default {
 <style lang="scss" scoped>
 .item:hover {
   background: #f9f9f9;
+  cursor: pointer;
 }
 td {
   text-align: left;
@@ -81,6 +91,7 @@ td {
 span {
   padding: 2px 8px;
   border-radius: 4px;
+  text-transform: capitalize;
 }
 .pending {
   background: #fffbeb;

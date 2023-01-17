@@ -42,24 +42,7 @@ export default {
   components: {
     UploadIcon,
   },
-  props: {
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-    maxSize: {
-      type: Number,
-      required: true,
-    },
-    maxNumber: {
-      type: Number,
-      required: true,
-    },
-    typeFile: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: ["multiple", "maxSize", "maxNumber", "typeFile"],
   data() {
     return {
       errors: {

@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="user">
-      <img class="user__avatar" :src="avatar" alt="avatar" />
+      <img class="user__avatar" :src="avatarUser" alt="avatar" />
       <span class="user__name">{{ fullname }}</span>
       <span class="user__pos">{{ position }}</span>
     </div>
@@ -14,6 +14,8 @@
 
 <script>
 import toast from "@/components/toast/toast";
+import avatarDefault from "@/assets/avatar.png";
+import { BASE_URL } from "@/constants/detailConstants";
 export default {
   data() {
     return {
@@ -27,10 +29,10 @@ export default {
     },
   },
   computed: {
-    avatar() {
+    avatarUser() {
       return this.user.avatar
-        ? `http://localhost:9999/uploads/${this.user.avatar}`
-        : "";
+        ? `${BASE_URL}${this.user.avatar}`
+        : avatarDefault;
     },
     fullname() {
       return this.user.fullname;
@@ -41,14 +43,14 @@ export default {
   },
   methods: {
     logout() {
-      toast.addToast({
-        title: "Success",
-        type: "success",
-        position: "bottom-left",
-        message: "Successfully!",
-        duration: 2000,
-      });
-      // this.$emit("logout");
+      // toast.addToast({
+      //   title: "Success",
+      //   type: "success",
+      //   position: "top-left",
+      //   message: "Successfully!",
+      //   duration: 2000,
+      // });
+      this.$emit("logout");
     },
   },
 };

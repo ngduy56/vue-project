@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import { registerDataForm } from "@/features/requests/registerDataForm";
+import BackIcon from "@/components/icons/BackIcon.vue";
 import UserItem from "@/features/requests/UserItem.vue";
 import RegisterForm from "@/components/dynamicForm/DynamicForm.vue";
-import BackIcon from "@/components/icons/BackIcon.vue";
 import RequestActions from "@/features/requests/RequestActions.vue";
 import { mapActions, mapGetters } from "vuex";
+import { registerDataForm } from "@/features/requests/registerDataForm";
 export default {
   data() {
     return {
@@ -28,7 +28,7 @@ export default {
   },
   async created() {
     const id = this.$route.params.id;
-    await this.getUser({ id: id, reload: false });
+    await this.getUser({ id: id, isAuthor: false });
     this.fillDataForm();
   },
   beforeDestroy() {
@@ -52,7 +52,7 @@ export default {
       this.backToHome();
     },
     fillDataForm() {
-      let user = JSON.parse(JSON.stringify(this.currentUser));
+      let user = { ...this.currentUser };
       const newPosition = [];
       const positionValue = user.position.split(", ");
       positionValue.forEach((item, index) => {
@@ -70,6 +70,7 @@ export default {
       const values = Object.values(user);
 
       this.registerDataForm.forEach((item) => {
+        item.isDone = true;
         item.data.forEach((child) => {
           keys.forEach((key) => {
             const index = keys.indexOf(key);
@@ -117,6 +118,7 @@ export default {
     position: relative;
     width: 100%;
     flex: 1;
+
     padding: 0;
     background-color: transparent;
     box-shadow: none;
@@ -124,9 +126,11 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 0;
+
     .form {
       height: 100%;
       flex: 1;
+
       .container {
         min-height: 100%;
       }

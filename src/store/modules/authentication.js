@@ -20,7 +20,13 @@ const getters = {
   userList: (state) => state.userList,
   loading: (state) => state.loading,
 
-  limit: (state) => state.limit,
+  start: (state) => state.limit * (state.pageNum - 1) + 1,
+  end: (state, getters) => {
+    if (getters.start + state.limit - 1 > getters.total) {
+      return getters.total;
+    } else return getters.start + state.limit - 1;
+  },
+
   total: (state) => state.total.length,
   pageNum: (state) => state.pageNum,
   totalPage: (state) => Math.ceil(state.total.length / state.limit),
@@ -43,7 +49,6 @@ const mutations = {
     state.avatarUser = avatar;
   },
   CHANGE_PAGE(state, page) {
-    console.log(page);
     state.pageNum = page;
     let statIndex = state.limit * (state.pageNum - 1);
     let endIndex = statIndex + state.limit;
@@ -70,9 +75,9 @@ const actions = {
   },
   async signUp({ dispatch, commit, state }, data) {
     await dispatch("uploadAvatar", data.avatar);
-    let avatar = state.avatarUser;
+    let avatar = state.avatarUser ? state.avatarUser : "";
     let newPosition = [];
-    data.position.map((item) => {
+    data.position.forEach((item) => {
       newPosition.push(item.name);
     });
     const registerForm = {
@@ -93,7 +98,6 @@ const actions = {
       const response = await axiosClient.post("/auth/signup", registerForm);
       console.log(response);
       if (response) {
-        // commit("SET_USER", response.data);
         commit("SET_LOADING", false);
         toast.addToast({
           title: "Success Register",

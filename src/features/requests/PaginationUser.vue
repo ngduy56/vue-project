@@ -1,7 +1,7 @@
 <template>
   <div class="pagi__info">
     <BackPaginationIcon @click.native="prePage(pageNum)" />
-    <span>1 ~ {{ limit }} trong tổng cộng {{ total }} bản ghi</span>
+    <span>{{ start }} ~ {{ end }} trong tổng cộng {{ total }} bản ghi</span>
     <NextPaginationIcon @click.native="nextPage(pageNum)" />
   </div>
 </template>
@@ -19,7 +19,8 @@ export default {
   computed: {
     ...mapGetters({
       total: "authentication/total",
-      limit: "authentication/limit",
+      start: "authentication/start",
+      end: "authentication/end",
       pageNum: "authentication/pageNum",
       totalPage: "authentication/totalPage",
     }),

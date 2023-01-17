@@ -1,6 +1,6 @@
 <template>
-  <div class="user__item" @click="$emit('input', id)">
-    <img class="user__avatar" :src="avatar" />
+  <div class="user__item">
+    <img class="user__avatar" :src="avatarUser" />
     <div class="user__info">
       <p class="user__name">
         {{ fullname }}
@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import avatarDefault from "@/assets/avatar.png";
+import { BASE_URL } from "@/constants/detailConstants";
 export default {
   props: {
     user: {
@@ -21,13 +23,10 @@ export default {
     },
   },
   computed: {
-    id() {
-      return this.user.id;
-    },
-    avatar() {
+    avatarUser() {
       return this.user.avatar
-        ? `http://localhost:9999/uploads/${this.user.avatar}`
-        : "";
+        ? `${BASE_URL}${this.user.avatar}`
+        : avatarDefault;
     },
     fullname() {
       return this.user.fullname;

@@ -33,27 +33,7 @@ export default {
       immediate: true,
     },
   },
-  props: {
-    list: {
-      type: Array,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    label: {
-      type: String,
-    },
-    required: {
-      type: Boolean,
-    },
-    value: {
-      type: String,
-    },
-    error: {
-      type: String,
-    },
-  },
+  props: ["list", "readonly", "label", "required", "value", "error"],
   components: {
     InputLabel,
   },

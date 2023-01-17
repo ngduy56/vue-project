@@ -1,6 +1,6 @@
 <template>
   <div class="requests-container">
-    <UserList :userList="userList" />
+    <UserList :userList="userList" @navigateDetail="navigateDetail" />
     <PaginationUser />
   </div>
 </template>
@@ -24,6 +24,9 @@ export default {
     ...mapActions({
       getUserList: "authentication/getUserList",
     }),
+    navigateDetail(id) {
+      this.$router.push({ path: `users/${id}` });
+    },
   },
 };
 </script>
