@@ -6,7 +6,10 @@
       :required="required"
     />
     <input
-      type="text"
+      :class="{ 'in-valid': error }"
+      :type="type"
+      :style="{ width: `${width}px` }"
+      :readonly="readonly"
       :placeholder="placeholder"
       v-model="valueLocal"
       @input="onChange"
@@ -16,26 +19,40 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
+import InputLabel from "@/components/sharedComponents/InputLabel.vue";
 export default {
   data() {
     return {
       valueLocal: "",
     };
   },
+  components: {
+    InputLabel,
+  },
   watch: {
     value: {
       handler(val) {
         this.valueLocal = val;
       },
-      deep: true,
       immediate: true,
+      deep: true,
     },
   },
   props: {
+    value: {
+      type: String,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
     width: {
       type: Number,
       default: 450,
+    },
+    type: {
+      type: String,
+      default: "text",
     },
     placeholder: {
       type: String,
@@ -46,16 +63,14 @@ export default {
     required: {
       type: Boolean,
     },
+    maxLength: {
+      type: Number,
+    },
     error: {
       type: String,
     },
-    value: {
-      type: String,
-    },
   },
-  components: {
-    InputLabel,
-  },
+
   methods: {
     onChange() {
       this.$emit("input", this.valueLocal);
@@ -67,7 +82,6 @@ export default {
 <style lang="scss" scoped>
 .input-field {
   input {
-    width: 100%;
     height: 40px;
     outline: none;
     background: #ffffff;
@@ -81,6 +95,9 @@ export default {
       font-size: 14px;
       line-height: 20px;
     }
+  }
+  .in-valid {
+    border-color: red;
   }
   .error-vali {
     color: red;

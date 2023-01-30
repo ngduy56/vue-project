@@ -1,20 +1,20 @@
 <template>
-  <LoginContainer @onSubmit="onSubmit" />
+  <RegisterContainer @onSubmit="onSubmit" />
 </template>
 
 <script>
-import LoginContainer from "@/containers/LoginContainer.vue";
+import RegisterContainer from "@/containers/RegisterContainer.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
-    LoginContainer,
+    RegisterContainer,
   },
   methods: {
     ...mapActions({
-      login: "authentication/login",
+      signUp: "authentication/signUp",
     }),
     onSubmit(data) {
-      this.login(data);
+      this.signUp(data);
     },
   },
 };
