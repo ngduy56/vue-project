@@ -1,7 +1,8 @@
-import axiosClient from "@/axios/axiosClient";
-import { setUserId, removeUserId } from "@/utils/localStorage";
-import toast from "@/components/toast/toast";
 import { router } from "@/router";
+import { setUserId, removeUserId } from "@/utils/localStorage";
+import axiosClient from "@/axios/axiosClient";
+import toast from "@/components/toast/toast";
+import authService from "@/service/authService";
 
 const state = () => ({
   user: {},
@@ -43,7 +44,10 @@ const mutations = {
   },
   SET_USER_LIST(state, userList) {
     state.total = userList;
-    state.userList = state.total.slice(0, state.limit);
+    state.userList = state.total.slice(
+      state.limit * (state.pageNum - 1),
+      state.limit * (state.pageNum - 1) + state.limit
+    );
   },
   SET_AVATAR(state, avatar) {
     state.avatarUser = avatar;
@@ -64,7 +68,7 @@ const actions = {
     if (payload) {
       formData.append("file", payload[0]);
       try {
-        const response = await axiosClient.post("users/upload", formData);
+        const response = await authService.uploadAvatar(formData);
         if (response) {
           commit("SET_AVATAR", response.filename);
         }
@@ -81,22 +85,14 @@ const actions = {
       newPosition.push(item.name);
     });
     const registerForm = {
-      username: data.username,
-      password: data.password,
-      fullname: data.fullname,
-      birthday: data.birthday,
-      address: data.address,
+      ...data,
       position: newPosition.join(", "),
-      describe_yourself: data.describe_yourself,
       avatar: avatar,
-      reason: data.reason,
-      salary: data.salary,
       status: 0,
     };
     try {
       commit("SET_LOADING", true);
-      const response = await axiosClient.post("/auth/signup", registerForm);
-      console.log(response);
+      const response = await authService.signUp(registerForm);
       if (response) {
         commit("SET_LOADING", false);
         toast.addToast({
@@ -122,13 +118,11 @@ const actions = {
   },
   async login({ commit }, data) {
     const loginForm = {
-      username: data.username,
-      password: data.password,
+      ...data,
     };
     try {
       commit("SET_LOADING", true);
-      const response = await axiosClient.post("/auth/login", loginForm);
-      console.log(response);
+      const response = await authService.login(loginForm);
       if (response) {
         commit("SET_USER", response);
         setUserId(response.id);
@@ -171,7 +165,7 @@ const actions = {
   async getUserList({ commit }) {
     try {
       commit("SET_LOADING", true);
-      const response = await axiosClient.get("/users");
+      const response = await authService.getUserList();
       if (response) {
         commit("SET_USER_LIST", response);
         commit("SET_LOADING", false);
@@ -183,7 +177,7 @@ const actions = {
   async approval({ commit, dispatch }, { id, status }) {
     try {
       commit("SET_LOADING", true);
-      const response = await axiosClient.post("/users/status", { id, status });
+      const response = await authService.approval(id, status);
       if (response) {
         dispatch("getUserList");
         toast.addToast({

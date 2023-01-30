@@ -2,7 +2,9 @@
   <div class="main">
     <LeftSidebar :user="user" @logout="logoutUser" />
     <div class="container">
-      <router-view />
+      <transition>
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -54,6 +56,16 @@ export default {
     height: 100vh;
     flex: 1;
     padding: 48px 32px;
+  }
+
+  .slide-leave-active,
+  .slide-enter-active {
+    transition: all linear 0.3s;
+  }
+  .slide-enter,
+  .slide-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
   }
 }
 </style>

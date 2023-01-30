@@ -1,18 +1,35 @@
-import LoginPage from "@/pages/LoginPage";
-import RegisterPage from "@/pages/RegisterPage";
-import HomePage from "@/pages/HomePage";
-import RequestContainer from "@/containers/RequestContainer.vue";
-import DetailContainer from "@/containers/DetailContainer.vue";
+const LoginPage = () =>
+  import(/* webpackChunkName: "Login" */ "@/pages/LoginPage");
+const RegisterPage = () =>
+  import(/* webpackChunkName: "Regis" */ "@/pages/RegisterPage");
+const HomePage = () =>
+  import(/* webpackChunkName: "Home" */ "@/pages/HomePage");
+const RequestContainer = () =>
+  import(/* webpackChunkName: "RequestC" */ "@/containers/RequestContainer");
+const DetailContainer = () =>
+  import(/* webpackChunkName: "DetailsC" */ "@/containers/DetailContainer");
 
 export const routes = [
-  { path: "/", name: "LoginPage", component: LoginPage },
-  { path: "/register", name: "RegisterPage", component: RegisterPage },
+  {
+    path: "/",
+    name: "LoginPage",
+    component: LoginPage,
+  },
+  {
+    path: "/register",
+    name: "RegisterPage",
+    component: RegisterPage,
+  },
   {
     path: "/home",
     name: "HomePage",
     component: HomePage,
     children: [
-      { path: "users", name: "users", component: RequestContainer },
+      {
+        path: "users",
+        name: "users",
+        component: RequestContainer,
+      },
       {
         path: "users/:id",
         name: "userDetail",
@@ -20,5 +37,5 @@ export const routes = [
       },
     ],
   },
-  { path: "*", redirect: "/" },
+  { path: "*", redirect: "/register" },
 ];

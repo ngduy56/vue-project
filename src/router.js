@@ -8,6 +8,17 @@ export const router = new VueRouter({
   mode: "history",
   routes,
 });
+// router.beforeEach((to, from, next) => {
+//   const userId = getUserId();
+//   const publicPages = ["/", "/register", "/home"];
+//   const authRequired = publicPages.includes(to.path);
+//   if (authRequired && userId) {
+//     next({ path: "/home/users" });
+//   } else if (!authRequired && !userId) {
+//     next({ path: "/register" });
+//   } else next();
+// });
+
 router.beforeEach((to, from, next) => {
   const userId = getUserId();
   if (
